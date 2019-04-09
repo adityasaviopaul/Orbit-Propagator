@@ -46,7 +46,7 @@ import wget
 from datetime import datetime  
 from datetime import timedelta  
 
-
+#Deleting file if it exists in resource folder
 if os.path.exists('cubesat.txt'):
     os.remove('cubesat.txt')
         
@@ -244,6 +244,7 @@ print("Semi Major Axis (km)     :",sma_op)
 print("Perigee Distance (km)    :",pd_op)
 print("Orbital Period (minutes) :",ot)
 print("-----------------------------------------------------")
+#Closing File
 data.close()
 
 #===========End Of Program==========================================================#
