@@ -13,6 +13,8 @@ ESTCUBE 1 to a specific date (here : April 10, 2019).
 It reads the TLE(Two Line Element Set) from the online resource
 https://www.celestrak.com/NORAD/elements/cubesat.txt
 
+The Program downloads the TLE of the satellites into the resource folder and
+updates/overwrites the file everytime the code is run/executed.
 
 
 Reference Websites :
@@ -38,11 +40,16 @@ print("-----------------------------------------------------")
 print(".................Orbit Propagator....................")
 print("-----------------------------------------------------")
 #Importing Libraries
+import os
 import math
 import wget
 from datetime import datetime  
 from datetime import timedelta  
 
+
+if os.path.exists('cubesat.txt'):
+    os.remove('cubesat.txt')
+        
 #Reading file from online resource
 file_url = 'https://www.celestrak.com/NORAD/elements/cubesat.txt'
 #Downloading file to home folder
@@ -83,7 +90,8 @@ tle2 = lines[num1+1]
 tle2 = tle2.split()
 print(tle2)
 
-#Printing TLE for Estcube 1
+##Uncomment if you want to print every element of TLE
+#Printing TLE for Esctube 1 as an array
 #for i in range(len(tle1)):
 #    print(tle1[i])
 #print()
@@ -94,6 +102,7 @@ print(tle2)
 val01 = float(tle1[3])
 i,d = divmod(val01,1)
 day = list(str(i))
+
 
 #year
 days = day[2]+day[3]+day[4]
@@ -145,7 +154,7 @@ mm = tle2[6]
 mm=float(mm)
 #print(mm)
 
-#---------------Orbit Propagtion-------------------------
+#---------------Orbit Propagtion-------------------------#
 
 #Calculating Delta t (Days Elapsed)
 datetimeFormat = '%Y-%m-%d %H:%M:%S'
@@ -223,7 +232,7 @@ print("Mean Anomaly             : ",ma_rad,)
 print("Mean Motion              : ",mm)
 print("Delta t (days)           : ",dt)
 print()
-print("----------------Prpogated Orbit----------------------")
+print("----------------Propagated Orbit----------------------")
 print("Epoch                    :",year,"/",days,":",hours,":",minutes,":",seconds)
 print("Propogatordate           :",date2)
 print("Mean Anomaly (rad)       :",ma_op_rad)
@@ -235,6 +244,6 @@ print("Semi Major Axis (km)     :",sma_op)
 print("Perigee Distance (km)    :",pd_op)
 print("Orbital Period (minutes) :",ot)
 print("-----------------------------------------------------")
-
+data.close()
 
 #===========End Of Program==========================================================#
